@@ -66,3 +66,11 @@ const director1 = new Director(
 );
 
 console.log(director1);
+
+//html creation part
+
+const filmPara = document.createElement("p");
+filmPara.innerHTML = film1.filmName;
+
+const filmCard = document.querySelector(".root");
+filmCard.appendChild(filmPara);
