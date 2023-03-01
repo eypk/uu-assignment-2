@@ -1,5 +1,7 @@
 console.log("homework2");
 
+//everything will be developed using pure javascript
+
 // First Class Consrtuctor functions will be created
 
 //Class Movie parent Class
