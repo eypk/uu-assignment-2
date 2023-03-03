@@ -1,0 +1,9 @@
+.film-para {
+  border: 1px solid red;
+  color: red;
+}
+.film-para:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}

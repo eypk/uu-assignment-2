@@ -1,8 +1,17 @@
-console.log("homework2");
+// OverAll
 
-//everything will be developed using pure javascript
+// Develop a dynamic version of the website created in Assignment 1 using JavaScript (if necessary, you can change/extend the main theme). Use DOM methods, nodes, properties and events to interactively modify the content and appearance of your web-pages according to user actions. Use event listeners to process the events. Implement at least 1 case of event propagation (W3C model).
+// Create an info.html page whose main content is constructed purely through DOM manipulation (not document.write(), not .innerHTML). In other words, such elements as <nav>,< header>, <footer> and <aside> can still be a part of the file info.html, but all the actual content of the page has to be produced by JavaScript on the fly when the page is loaded.
 
-// First Class Consrtuctor functions will be created
+// Assigment Part
+
+// '''The content of this page should be populated using a hierarchy of objects where each object stores a structured representation of a corresponding entity. You need to implement several classes:
+// Class Movie will hold the structural representation of the entire film.
+// Class Artist will describe any person involved in the movie industry; it should specify at least the name and the year of birth.
+// Class Director will extend the class Artist; it can add a list of movies that this person has directed before.
+// Class Writer will extend the class Artist; it can add a list of books that this person has written before.
+// Class Actor will extend the class Artist; it can add a list of movies, in which this person starred before, and a link to his/her photo.
+// We assume, that nobody is interested in how writers and directors look like, and also that the same person cannot be an Actor and a Director and/or Writer.'''
 
 //Class Movie parent Class
 
@@ -12,18 +21,8 @@ class Movie {
     this.filmRating = filmRating;
   }
 }
-//ok
 
-//class Movies
-
-class Movies {
-  constructor(movieList) {
-    this.movieList = movieList;
-  }
-}
-//ok
-
-//Class Artisit by Mark
+//Class Artisit
 
 class Artist extends Movie {
   constructor(filmName, filmRating, artistName, ArtistDob) {
@@ -32,9 +31,8 @@ class Artist extends Movie {
     this.ArtistDob = ArtistDob;
   }
 }
-//ok
 
-//Class Director by Fatih
+//Class Director
 
 class Director extends Artist {
   constructor(filmName, filmRating, artistName, ArtistDob, movieList) {
@@ -43,34 +41,83 @@ class Director extends Artist {
   }
 }
 
-//Class Writer by Eyup
+//Class Writer
 
-//Class Actor by Fatih
+class Writer extends Artist {
+  constructor(filmName, filmRating, artistName, ArtistDob, books) {
+    super(filmName, filmRating, artistName, ArtistDob);
+    this.books = books;
+  }
+}
+
+//Class Actor
+
+class Actor extends Artist {
+  constructor(filmName, filmRating, artistName, ArtistDob, movieList, image) {
+    super(filmName, filmRating, artistName, ArtistDob);
+    this.movieList = movieList;
+    this.image = image;
+  }
+}
+
+//Class ok
 
 // Entity to be created using constructor
 
-const film1 = new Movie("mission impossible", 8);
-const film2 = new Movie("mission impossible-2", 8);
-const film3 = new Movie("mission impossible-3", 8);
-
-const movieList = new Movies([film1, film2, film3]);
-
-const artistTom = new Artist("mission impossible", 8, "Tom Cruise", 1966);
-
-const director1 = new Director(
+const artistTom = new Artist(
   "mission impossible",
   8,
   "Tom Cruise",
   1966,
-  movieList
+  ["mission impossible", "jack reacher"],
+  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fmubi.com%2Fcast%2Ftom-cruise&psig=AOvVaw3kpUjzQlx10YQGdETGC68e&ust=1677938730816000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCOiOxoH3v_0CFQAAAAAdAAAAABAE"
 );
 
-console.log(director1);
+const directorTarantino = new Director(
+  "kill bill",
+  7.5,
+  "quentin tarantino",
+  1978,
+  [
+    "kill bill - 1",
+    "kill bill - 2",
+    "unchanged django",
+    "iglorious bustards",
+    "good fellas",
+  ]
+);
 
-//html creation part
+const writerNolan = new Writer("Dark Noght", 8, "Christopher Nolan", 1970, [
+  "Dark-Night",
+  "Tenet",
+  "inception",
+  "intersellar",
+  "Dunkirk",
+]);
 
-const filmPara = document.createElement("p");
-filmPara.innerHTML = film1.filmName;
+console.log(directorTarantino);
+console.log(artistTom);
+console.log(writerNolan);
 
-const filmCard = document.querySelector(".root");
-filmCard.appendChild(filmPara);
+//Assignment HTML Part
+
+// Use ES6 classes and ES6-style object construction.
+// The users should be able to mouseover the names/photos of Artists and see their extended information (previous books, movies) in a tooltip.
+// Implement two menus in your <header> or <footer> that allow the user to dynamically change the appearance of elements on a page. One menu should be used to select an element, another to modify the selected element appearance. The options of the first menu should contain body, header, footer, aside, articles and sections (do not go deeper in the DOM hierarchy). They should be created on the fly by traversing the DOM of the page. In other words, a page can have more than one article and more than one section, and not necessarily have an aside, but the menu should be able to read them correctly from the DOM of the page. The option of the second menu should allow to change at least the font size and the color of the selected elements.
+
+//body style reset
+
+document.body.style.boxSizing = "border-box";
+document.body.style.margin = "0px";
+document.body.style.padding = "0px";
+document.body.style.backgroundColor = "#fafafa";
+
+//root
+
+const root = document.querySelector(".root");
+
+// navbar
+
+const navBar = document.createElement("nav");
+navBar.innerText = "NAVBAR";
+root.appendChild(navBar);
