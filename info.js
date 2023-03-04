@@ -158,12 +158,19 @@ const SelectItem = (e) => {
   switch (selectedMenuItem) {
     case "Director":
       createArtistCard(directorTarantino);
+      selectedMenuItem = directorTarantino;
       console.log("Director chosen");
       break;
+
     case "Writer":
+      createArtistCard(writerNolan);
+      selectedMenuItem = writerNolan;
       console.log("Writer chosen");
       break;
+
     case "Actor":
+      createArtistCard(artistTom);
+      selectedMenuItem = artistTom;
       console.log("Actor chosen");
       break;
   }
@@ -171,12 +178,13 @@ const SelectItem = (e) => {
   // createArtistCard(selectedMenuItem);
 };
 
-selectBox.addEventListener("change", (e) => SelectItem(e));
+selectBox.addEventListener("change", (e) => {
+  SelectItem(e);
+});
 
 // Root > Main
 
 const mainSection = document.createElement("main");
-mainSection.style.width = "200px";
 root.appendChild(mainSection);
 
 const createArtistCard = (object) => {

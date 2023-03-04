@@ -25,3 +25,9 @@ nav {
   display: flex;
   justify-content: center;
 }
+
+.card {
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
