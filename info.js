@@ -128,7 +128,7 @@ navBar.appendChild(headerMenu);
 
 // Select Box Menu in navBar
 
-let selectedMenuItem = "Director";
+let selectedMenuItem = directorTarantino;
 
 const selectBox = document.createElement("select");
 
@@ -157,6 +157,7 @@ const SelectItem = (e) => {
 
   switch (selectedMenuItem) {
     case "Director":
+      createArtistCard(directorTarantino);
       console.log("Director chosen");
       break;
     case "Writer":
@@ -167,7 +168,7 @@ const SelectItem = (e) => {
       break;
   }
 
-  createArtistCard(selectedMenuItem);
+  // createArtistCard(selectedMenuItem);
 };
 
 selectBox.addEventListener("change", (e) => SelectItem(e));
@@ -179,24 +180,42 @@ mainSection.style.width = "200px";
 root.appendChild(mainSection);
 
 const createArtistCard = (object) => {
-  let card = `<div class="card tooltip">
+  let card = `<div class="card tooltip-container">
   <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:200px">
-  <h4><b>${object}</b></h4> 
-  <p>${object}</p> 
+  <h4><b>${object.artistName}</b></h4> 
+  <p>${object.ArtistDob}</p> 
   </div>`;
 
   mainSection.innerHTML = card;
 };
 
+//TOOLTIP
+
 //onMouseOver
 
 mainSection.addEventListener("mouseover", (e) => showTooltip(e));
 
-const showTooltip = (object) => {
-  const tooltipContainer = object.target.closest(".tooltip");
-  let tooltipText = `<span class="tooltiptext"><p>${selectedMenuItem}</p>  <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:20px">
-</span>`;
-  tooltipContainer.insertAdjacentHTML("afterbegin", tooltipText);
+const showTooltip = (e) => {
+  try {
+    const tooltipContainer = e.target.closest(".tooltip-container");
+    let tooltip = `
+    <div class="tooltip">
+    <p>${selectedMenuItem.artistName}</p>
+    <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:20px">
+    </div>`;
+    tooltipContainer.insertAdjacentHTML("afterbegin", tooltip);
+  } catch (error) {}
+};
+
+//onMouseOut
+mainSection.addEventListener("mouseout", (e) => deleteTooltip(e));
+
+const deleteTooltip = (e) => {
+  try {
+    const tooltipContainer = e.target.closest(".tooltip-container");
+    let tooltip = tooltipContainer.querySelector(".tooltip");
+    tooltipContainer.removeChild(tooltip);
+  } catch (error) {}
 };
 
 //window load
