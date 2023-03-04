@@ -175,23 +175,32 @@ selectBox.addEventListener("change", (e) => SelectItem(e));
 // Root > Main
 
 const mainSection = document.createElement("main");
+mainSection.style.width = "200px";
 root.appendChild(mainSection);
 
 const createArtistCard = (object) => {
-  let card = `<div class="card">
-  <img src="./assets/images/m-i.jpg" alt="Avatar" style="width:200px">
-  <div class="container">
+  let card = `<div class="card tooltip">
+  <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:200px">
   <h4><b>${object}</b></h4> 
   <p>${object}</p> 
-  </div>
   </div>`;
 
   mainSection.innerHTML = card;
 };
 
+//onMouseOver
+
+mainSection.addEventListener("mouseover", (e) => showTooltip(e));
+
+const showTooltip = (object) => {
+  const tooltipContainer = object.target.closest(".tooltip");
+  let tooltipText = `<span class="tooltiptext"><p>${selectedMenuItem}</p>  <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:20px">
+</span>`;
+  tooltipContainer.insertAdjacentHTML("afterbegin", tooltipText);
+};
+
 //window load
 window.onload = () => {
   console.log("page is fully loaded");
-
   createArtistCard(selectedMenuItem);
 };
