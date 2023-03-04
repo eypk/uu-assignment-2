@@ -103,7 +103,9 @@ console.log(writerNolan);
 
 // Use ES6 classes and ES6-style object construction.
 // The users should be able to mouseover the names/photos of Artists and see their extended information (previous books, movies) in a tooltip.
-// Implement two menus in your <header> or <footer> that allow the user to dynamically change the appearance of elements on a page. One menu should be used to select an element, another to modify the selected element appearance. The options of the first menu should contain body, header, footer, aside, articles and sections (do not go deeper in the DOM hierarchy). They should be created on the fly by traversing the DOM of the page. In other words, a page can have more than one article and more than one section, and not necessarily have an aside, but the menu should be able to read them correctly from the DOM of the page. The option of the second menu should allow to change at least the font size and the color of the selected elements.
+// Implement two menus in your <header> or <footer> that allow the user to dynamically change the appearance of elements on a page. One menu should be used to select an element, another to modify the selected element appearance.
+//1- The options of the first menu should contain body, header, footer, aside, articles and sections(do not go deeper in the DOM hierarchy). They should be created on the fly by traversing the DOM of the page.In other words, a page can have more than one article and more than one section, and not necessarily have an aside, but the menu should be able to read them correctly from the DOM of the page.
+//2- The option of the second menu should allow to change at least the font size and the color of the selected elements.
 
 //body style reset
 
@@ -112,12 +114,84 @@ document.body.style.margin = "0px";
 document.body.style.padding = "0px";
 document.body.style.backgroundColor = "#fafafa";
 
-//root
+// ROOT
 
 const root = document.querySelector(".root");
 
-// navbar
+// Root > navbar
 
 const navBar = document.createElement("nav");
-navBar.innerText = "NAVBAR";
 root.appendChild(navBar);
+
+const headerMenu = document.createElement("header");
+navBar.appendChild(headerMenu);
+
+// Select Box Menu in navBar
+
+let selectedMenuItem = "Director";
+
+const selectBox = document.createElement("select");
+
+const option1 = document.createElement("option");
+option1.value = "Director";
+option1.text = "Director";
+
+const option2 = document.createElement("option");
+option2.value = "Writer";
+option2.text = "Writer";
+
+const option3 = document.createElement("option");
+option3.value = "Actor";
+option3.text = "Actor";
+
+selectBox.add(option1);
+selectBox.add(option2);
+selectBox.add(option3);
+
+headerMenu.appendChild(selectBox);
+
+// change event
+
+const SelectItem = (e) => {
+  selectedMenuItem = e.target.value;
+
+  switch (selectedMenuItem) {
+    case "Director":
+      console.log("Director chosen");
+      break;
+    case "Writer":
+      console.log("Writer chosen");
+      break;
+    case "Actor":
+      console.log("Actor chosen");
+      break;
+  }
+
+  createArtistCard(selectedMenuItem);
+};
+
+selectBox.addEventListener("change", (e) => SelectItem(e));
+
+// Root > Main
+
+const mainSection = document.createElement("main");
+root.appendChild(mainSection);
+
+const createArtistCard = (object) => {
+  let card = `<div class="card">
+  <img src="./assets/images/m-i.jpg" alt="Avatar" style="width:200px">
+  <div class="container">
+  <h4><b>${object}</b></h4> 
+  <p>${object}</p> 
+  </div>
+  </div>`;
+
+  mainSection.innerHTML = card;
+};
+
+//window load
+window.onload = () => {
+  console.log("page is fully loaded");
+
+  createArtistCard(selectedMenuItem);
+};
