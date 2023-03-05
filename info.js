@@ -64,13 +64,13 @@ class Actor extends Artist {
 
 // Entity to be created using constructor
 
-const artistTom = new Artist(
+const artistTom = new Actor(
   "mission impossible",
   8,
   "Tom Cruise",
   1966,
-  ["mission impossible", "jack reacher"],
-  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fmubi.com%2Fcast%2Ftom-cruise&psig=AOvVaw3kpUjzQlx10YQGdETGC68e&ust=1677938730816000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCOiOxoH3v_0CFQAAAAAdAAAAABAE"
+  ["mission impossible", "jack reacher", "top gun"],
+  "https://hips.hearstapps.com/hmg-prod/images/gettyimages-693134468.jpg"
 );
 
 const directorTarantino = new Director(
@@ -78,21 +78,13 @@ const directorTarantino = new Director(
   7.5,
   "quentin tarantino",
   1978,
-  [
-    "kill bill - 1",
-    "kill bill - 2",
-    "unchanged django",
-    "iglorious bustards",
-    "good fellas",
-  ]
+  ["kill bill series", "unchanged django", "iglorious bustards"]
 );
 
 const writerNolan = new Writer("Dark Noght", 8, "Christopher Nolan", 1970, [
   "Dark-Night",
-  "Tenet",
   "inception",
   "intersellar",
-  "Dunkirk",
 ]);
 
 console.log(directorTarantino);
@@ -113,43 +105,56 @@ document.body.style.boxSizing = "border-box";
 document.body.style.margin = "0px";
 document.body.style.padding = "0px";
 document.body.style.backgroundColor = "#fafafa";
+document.body.style.fontSize = "16px";
 
 // ROOT
 
 const root = document.querySelector(".root");
 
-// Root > navbar
+// Root > header
+const header = document.createElement("header");
+root.appendChild(header);
 
-const navBar = document.createElement("nav");
-root.appendChild(navBar);
+const headerNavBar = document.createElement("nav");
+header.appendChild(headerNavBar);
 
-const headerMenu = document.createElement("header");
-navBar.appendChild(headerMenu);
+// Root > Main
 
-// Select Box Menu in navBar
+const mainSection = document.createElement("main");
+root.appendChild(mainSection);
 
-let selectedMenuItem = directorTarantino;
+// Root > Footer
+const footer = document.createElement("footer");
+root.appendChild(footer);
 
-const selectBox = document.createElement("select");
+const footerNavBar = document.createElement("nav");
+footer.appendChild(footerNavBar);
 
-const option1 = document.createElement("option");
-option1.value = "Director";
-option1.text = "Director";
+//FUNCTIONS
 
-const option2 = document.createElement("option");
-option2.value = "Writer";
-option2.text = "Writer";
+// Select Box Menu in navBars
 
-const option3 = document.createElement("option");
-option3.value = "Actor";
-option3.text = "Actor";
+const createNavbar = () => {
+  const selectBox = document.createElement("select");
 
-selectBox.add(option1);
-selectBox.add(option2);
-selectBox.add(option3);
+  const option1 = document.createElement("option");
+  option1.value = "Director";
+  option1.text = "Director";
 
-headerMenu.appendChild(selectBox);
+  const option2 = document.createElement("option");
+  option2.value = "Writer";
+  option2.text = "Writer";
 
+  const option3 = document.createElement("option");
+  option3.value = "Actor";
+  option3.text = "Actor";
+
+  selectBox.add(option1);
+  selectBox.add(option2);
+  selectBox.add(option3);
+
+  return selectBox;
+};
 // change event
 
 const SelectItem = (e) => {
@@ -174,49 +179,79 @@ const SelectItem = (e) => {
       console.log("Actor chosen");
       break;
   }
-
-  // createArtistCard(selectedMenuItem);
 };
 
-selectBox.addEventListener("change", (e) => {
+// Select from header
+headerNavBar.addEventListener("change", (e) => {
   SelectItem(e);
 });
 
-// Root > Main
+// Select from footer
+footerNavBar.addEventListener("change", (e) => {
+  SelectItem(e);
+});
 
-const mainSection = document.createElement("main");
-root.appendChild(mainSection);
+//Create Card
 
-const createArtistCard = (object) => {
-  let card = `<div class="card tooltip-container">
-  <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:200px">
-  <h4><b>${object.artistName}</b></h4> 
-  <p>${object.ArtistDob}</p> 
-  </div>`;
+const createArtistCard = (artist) => {
+  //div.tooltip-container
+  let cardItem = document.createElement("div");
+  cardItem.classList = "card tooltip-container";
 
-  mainSection.innerHTML = card;
+  //img image
+  let img = document.createElement("img");
+  img.classList = "card image";
+  img.width = 200;
+  imgUrl = artist.image ? artist.image : "./assets/images/m-i.jpg";
+  img.setAttribute("src", imgUrl);
+  cardItem.appendChild(img);
+
+  //p artistname
+  let p = document.createElement("p");
+  p.innerText = artist.artistName.toUpperCase();
+  cardItem.appendChild(p);
+
+  mainSection.innerHTML = cardItem.outerHTML;
 };
 
-//TOOLTIP
+//create tooltip
 
-//onMouseOver
+const insertTooltip = (e) => {
+  const tooltipContainer = e.target.closest(".tooltip-container");
+  let artist = selectedMenuItem;
 
-mainSection.addEventListener("mouseover", (e) => showTooltip(e));
-
-const showTooltip = (e) => {
   try {
-    const tooltipContainer = e.target.closest(".tooltip-container");
-    let tooltip = `
-    <div class="tooltip">
-    <p>${selectedMenuItem.artistName}</p>
-    <img class="card image"src="./assets/images/m-i.jpg" alt="Avatar" style="width:20px">
-    </div>`;
-    tooltipContainer.insertAdjacentHTML("afterbegin", tooltip);
+    //div.tooltip
+    let tooltip = document.createElement("div");
+    tooltip.classList = "tooltip";
+    tooltip.style.position = "absolute";
+    tooltip.style.top = "0px";
+    // tooltip.style.visibility = "hidden";
+
+    //p artistname
+    let p = document.createElement("p");
+    p.innerText = artist.artistName.toUpperCase();
+    tooltip.appendChild(p);
+
+    //p artistname
+    let p2 = document.createElement("p");
+    p2.innerText = artist.movieList ? "Other Movies" : "Other Books";
+    tooltip.appendChild(p2);
+
+    //list
+    let ul = document.createElement("ul");
+    let list = artist.movieList ? artist.movieList : artist.books;
+
+    for (let i = 0; i < list.length; i++) {
+      let li = document.createElement("li");
+      li.textContent = list[i];
+      ul.appendChild(li);
+    }
+    tooltip.appendChild(ul);
+
+    tooltipContainer.appendChild(tooltip);
   } catch (error) {}
 };
-
-//onMouseOut
-mainSection.addEventListener("mouseout", (e) => deleteTooltip(e));
 
 const deleteTooltip = (e) => {
   try {
@@ -226,8 +261,17 @@ const deleteTooltip = (e) => {
   } catch (error) {}
 };
 
+//onMouseOver
+mainSection.addEventListener("mouseover", (e) => insertTooltip(e));
+
+//onMouseOut
+mainSection.addEventListener("mouseout", (e) => deleteTooltip(e));
+
 //window load
+let selectedMenuItem = directorTarantino;
 window.onload = () => {
   console.log("page is fully loaded");
+  headerNavBar.appendChild(createNavbar());
+  footerNavBar.appendChild(createNavbar());
   createArtistCard(selectedMenuItem);
 };
