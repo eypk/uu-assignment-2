@@ -69,7 +69,7 @@ const artistTom = new Actor(
   8,
   "Tom Cruise",
   1966,
-  ["mission impossible", "jack reacher", "top gun"],
+  ["Mission Impossible 1-7", "Jack Reacher 1-2", "Top Gun 1-2"],
   "https://hips.hearstapps.com/hmg-prod/images/gettyimages-693134468.jpg"
 );
 
@@ -78,7 +78,7 @@ const directorTarantino = new Director(
   7.5,
   "quentin tarantino",
   1978,
-  ["kill bill series", "unchanged django", "iglorious bustards"]
+  ["Kill Bill 1-2", "Unchanged Django", "Iglorious Bustards"]
 );
 
 const writerNolan = new Writer("Dark Noght", 8, "Christopher Nolan", 1970, [
@@ -118,6 +118,9 @@ root.appendChild(header);
 const headerNavBar = document.createElement("nav");
 header.appendChild(headerNavBar);
 
+const headerStyleBar = document.createElement("nav");
+header.appendChild(headerStyleBar);
+
 // Root > Main
 
 const mainSection = document.createElement("main");
@@ -136,6 +139,7 @@ footer.appendChild(footerNavBar);
 
 const createNavbar = () => {
   const selectBox = document.createElement("select");
+  selectBox.classList = "navBar";
 
   const option1 = document.createElement("option");
   option1.value = "Director";
@@ -155,7 +159,32 @@ const createNavbar = () => {
 
   return selectBox;
 };
-// change event
+// Select Box Menu in navBars
+
+const createStyleBar = () => {
+  const selectStyleBox = document.createElement("select");
+  selectStyleBox.classList = "navStyleBar";
+
+  const option1 = document.createElement("option");
+  option1.value = "fontSize";
+  option1.text = "Enlarge FontSize";
+
+  const option2 = document.createElement("option");
+  option2.value = "imageSize";
+  option2.text = "Enlarge ImageSize";
+
+  const option3 = document.createElement("option");
+  option3.value = "bgColor";
+  option3.text = "Dark Mode";
+
+  selectStyleBox.add(option1);
+  selectStyleBox.add(option2);
+  selectStyleBox.add(option3);
+
+  return selectStyleBox;
+};
+
+// select item
 
 const SelectItem = (e) => {
   selectedMenuItem = e.target.value;
@@ -180,16 +209,36 @@ const SelectItem = (e) => {
       break;
   }
 };
+// change style
 
-// Select from header
-headerNavBar.addEventListener("change", (e) => {
-  SelectItem(e);
-});
+const ChangeStyle = (e) => {
+  console.log(e.target.value);
+  selectedStyle = e.target.value;
+  let img = document.querySelector(".image");
+  let card = document.querySelector(".card");
 
-// Select from footer
-footerNavBar.addEventListener("change", (e) => {
-  SelectItem(e);
-});
+  switch (selectedStyle) {
+    case "fontSize":
+      mainSection.style.fontSize = "22px";
+      img.setAttribute("width", "200px");
+      card.style.backgroundColor = "#fafafa";
+      card.style.color = "#000";
+      break;
+
+    case "imageSize":
+      mainSection.style.fontSize = "16px";
+      img.setAttribute("width", "300px");
+      card.style.backgroundColor = "#fafafa";
+      card.style.color = "#000";
+      break;
+
+    case "bgColor":
+      mainSection.style.fontSize = "16px";
+      card.style.backgroundColor = "#a5a5a5";
+      card.style.color = "#FFF";
+      break;
+  }
+};
 
 //Create Card
 
@@ -197,6 +246,7 @@ const createArtistCard = (artist) => {
   //div.tooltip-container
   let cardItem = document.createElement("div");
   cardItem.classList = "card tooltip-container";
+  cardItem.style.backgroundColor = "#fafafa";
 
   //img image
   let img = document.createElement("img");
@@ -226,12 +276,13 @@ const insertTooltip = (e) => {
     tooltip.classList = "tooltip";
     tooltip.style.position = "absolute";
     tooltip.style.top = "0px";
+    tooltip.style.right = "0px";
     // tooltip.style.visibility = "hidden";
 
     //p artistname
-    let p = document.createElement("p");
-    p.innerText = artist.artistName.toUpperCase();
-    tooltip.appendChild(p);
+    let p1 = document.createElement("p");
+    p1.innerText = artist.artistName.toUpperCase();
+    tooltip.appendChild(p1);
 
     //p artistname
     let p2 = document.createElement("p");
@@ -261,17 +312,35 @@ const deleteTooltip = (e) => {
   } catch (error) {}
 };
 
-//onMouseOver
+// EVENT LISTENERS
+
+//Card onMouseOver
 mainSection.addEventListener("mouseover", (e) => insertTooltip(e));
 
-//onMouseOut
+// Card onMouseOut
 mainSection.addEventListener("mouseout", (e) => deleteTooltip(e));
 
-//window load
+// Select from header
+headerNavBar.addEventListener("change", (e) => {
+  SelectItem(e);
+});
+// Change Style
+headerStyleBar.addEventListener("change", (e) => {
+  ChangeStyle(e);
+});
+
+// Select from footer
+footerNavBar.addEventListener("change", (e) => {
+  SelectItem(e);
+});
+
+// ONLOAD
 let selectedMenuItem = directorTarantino;
+let selectedStyle = "";
 window.onload = () => {
   console.log("page is fully loaded");
   headerNavBar.appendChild(createNavbar());
+  headerStyleBar.appendChild(createStyleBar());
   footerNavBar.appendChild(createNavbar());
   createArtistCard(selectedMenuItem);
 };
