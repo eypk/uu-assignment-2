@@ -69,7 +69,7 @@ class Actor extends Artist {
 const movieMI = new Movie("Mission Impossible", 8);
 
 const artistTom = new Actor(
-  "mission impossible",
+  "Mission Impossible 1-7",
   8,
   "Tom Cruise",
   1966,
@@ -78,7 +78,7 @@ const artistTom = new Actor(
 );
 
 const directorTarantino = new Director(
-  "kill bill",
+  "Kill Bill 1-2",
   7.5,
   "quentin tarantino",
   1978,
@@ -87,11 +87,17 @@ const directorTarantino = new Director(
 );
 
 const writerBruce = new Writer(
-  "mission impossible",
+  "The Rifleman",
   8,
   "Bruce Bernard Geller",
   1930,
-  ["Zane Grey Theater", "Have Gun", "Will Travel", "The Rebel", "The Rifleman"],
+  [
+    "Zane Grey Theater",
+    "Have Gun",
+    "Will Travel",
+    "The Rebel",
+    "Mission Impossible",
+  ],
   "https://media0009.elcinema.com/uploads/_315x420_566c4fa535b4c00bc142813fbd5d1f908703fbd540361ce1b2ba42422bb86a05.jpg"
 );
 console.log(movieMI);
@@ -235,11 +241,11 @@ const ChangeStyle = (e) => {
 
   switch (selectedStyle) {
     case "fontSize":
-      mainSection.style.fontSize = "18px";
       img.setAttribute("width", "250px");
-      img.setAttribute("width", "300px");
+      img.setAttribute("height", "300px");
       card.style.backgroundColor = "#fafafa";
-      card.style.color = "#000";
+      mainSection.style.fontSize = "18px";
+      mainSection.style.fontWeight = "bold";
       break;
 
     case "imageSize":
@@ -248,21 +254,25 @@ const ChangeStyle = (e) => {
       img.setAttribute("height", "450px");
       card.style.backgroundColor = "#fafafa";
       card.style.color = "#000";
+      mainSection.style.fontWeight = "normal";
+
       break;
 
     case "DarkMode":
       mainSection.style.fontSize = "16px";
-      img.setAttribute("width", "250px");
-      img.setAttribute("width", "300px");
+      // img.setAttribute("width", "250px");
+      // img.setAttribute("height", "300px");
       body.style.backgroundColor = "#000";
       body.style.color = "#FFF";
+      card.style.color = "#000";
+
       break;
 
     case "LightMode":
       mainSection.style.fontSize = "16px";
-      img.setAttribute("width", "250px");
-      img.setAttribute("width", "300px");
-      body.style.backgroundColor = "#FFF";
+      // img.setAttribute("width", "250px");
+      // img.setAttribute("height", "300px");
+      body.style.backgroundColor = "#fafafa";
       body.style.color = "#000";
 
       break;
@@ -276,6 +286,7 @@ const createArtistCard = (artist) => {
   let cardItem = document.createElement("div");
   cardItem.classList = "card tooltip-container";
   cardItem.style.backgroundColor = "#fafafa";
+  cardItem.style.textAlign = "center";
 
   //movieheader
   const movieHeader = document.createElement("h2");
@@ -286,11 +297,11 @@ const createArtistCard = (artist) => {
   //img image
   let img = document.createElement("img");
   img.classList = "card image";
-  img.width = 250;
-  img.height = 300;
   imgUrl = artist.image ? artist.image : "./assets/images/m-i.jpg";
   img.setAttribute("src", imgUrl);
   img.setAttribute("alt", "artist image");
+  img.width = 250;
+  img.height = 300;
   cardItem.appendChild(img);
 
   //p artistname
