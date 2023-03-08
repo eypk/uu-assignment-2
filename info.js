@@ -35,18 +35,20 @@ class Artist extends Movie {
 //Class Director
 
 class Director extends Artist {
-  constructor(filmName, filmRating, artistName, ArtistDob, movieList) {
+  constructor(filmName, filmRating, artistName, ArtistDob, movieList, image) {
     super(filmName, filmRating, artistName, ArtistDob);
     this.movieList = movieList;
+    this.image = image;
   }
 }
 
 //Class Writer
 
 class Writer extends Artist {
-  constructor(filmName, filmRating, artistName, ArtistDob, books) {
+  constructor(filmName, filmRating, artistName, ArtistDob, books, image) {
     super(filmName, filmRating, artistName, ArtistDob);
     this.books = books;
+    this.image = image;
   }
 }
 
@@ -64,6 +66,8 @@ class Actor extends Artist {
 
 // Entity to be created using constructor
 
+const movieMI = new Movie("Mission Impossible", 8);
+
 const artistTom = new Actor(
   "mission impossible",
   8,
@@ -78,18 +82,22 @@ const directorTarantino = new Director(
   7.5,
   "quentin tarantino",
   1978,
-  ["Kill Bill 1-2", "Unchanged Django", "Iglorious Bustards"]
+  ["Kill Bill 1-2", "Unchanged Django", "Iglorious Bustards"],
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT34nsUi4KH0jaFsw_1TVRQLLQxKX0H61J1Rg&usqp=CAU"
 );
 
-const writerNolan = new Writer("Dark Noght", 8, "Christopher Nolan", 1970, [
-  "Dark-Night",
-  "inception",
-  "intersellar",
-]);
-
+const writerBruce = new Writer(
+  "mission impossible",
+  8,
+  "Bruce Bernard Geller",
+  1930,
+  ["Zane Grey Theater", "Have Gun", "Will Travel", "The Rebel", "The Rifleman"],
+  "https://media0009.elcinema.com/uploads/_315x420_566c4fa535b4c00bc142813fbd5d1f908703fbd540361ce1b2ba42422bb86a05.jpg"
+);
+console.log(movieMI);
 console.log(directorTarantino);
 console.log(artistTom);
-console.log(writerNolan);
+console.log(writerBruce);
 
 //Assignment HTML Part
 
@@ -115,11 +123,17 @@ const root = document.querySelector(".root");
 const header = document.createElement("header");
 root.appendChild(header);
 
+// Root > header > Nav Bar
 const headerNavBar = document.createElement("nav");
 header.appendChild(headerNavBar);
 
+// Root > header > Style Bar
 const headerStyleBar = document.createElement("nav");
 header.appendChild(headerStyleBar);
+
+//Root Movie Info
+const movieSection = document.createElement("section");
+root.appendChild(movieSection);
 
 // Root > Main
 
@@ -174,12 +188,17 @@ const createStyleBar = () => {
   option2.text = "Enlarge ImageSize";
 
   const option3 = document.createElement("option");
-  option3.value = "bgColor";
+  option3.value = "DarkMode";
   option3.text = "Dark Mode";
+
+  const option4 = document.createElement("option");
+  option4.value = "LightMode";
+  option4.text = "Light Mode";
 
   selectStyleBox.add(option1);
   selectStyleBox.add(option2);
   selectStyleBox.add(option3);
+  selectStyleBox.add(option4);
 
   return selectStyleBox;
 };
@@ -193,49 +212,59 @@ const SelectItem = (e) => {
     case "Director":
       createArtistCard(directorTarantino);
       selectedMenuItem = directorTarantino;
-      console.log("Director chosen");
       break;
 
     case "Writer":
-      createArtistCard(writerNolan);
-      selectedMenuItem = writerNolan;
-      console.log("Writer chosen");
+      createArtistCard(writerBruce);
+      selectedMenuItem = writerBruce;
       break;
 
     case "Actor":
       createArtistCard(artistTom);
       selectedMenuItem = artistTom;
-      console.log("Actor chosen");
       break;
   }
 };
 // change style
 
 const ChangeStyle = (e) => {
-  console.log(e.target.value);
   selectedStyle = e.target.value;
   let img = document.querySelector(".image");
   let card = document.querySelector(".card");
+  let body = document.querySelector("body");
 
   switch (selectedStyle) {
     case "fontSize":
-      mainSection.style.fontSize = "22px";
-      img.setAttribute("width", "200px");
+      mainSection.style.fontSize = "18px";
+      img.setAttribute("width", "250px");
+      img.setAttribute("width", "300px");
       card.style.backgroundColor = "#fafafa";
       card.style.color = "#000";
       break;
 
     case "imageSize":
       mainSection.style.fontSize = "16px";
-      img.setAttribute("width", "300px");
+      img.setAttribute("width", "350px");
+      img.setAttribute("height", "450px");
       card.style.backgroundColor = "#fafafa";
       card.style.color = "#000";
       break;
 
-    case "bgColor":
+    case "DarkMode":
       mainSection.style.fontSize = "16px";
-      card.style.backgroundColor = "#a5a5a5";
-      card.style.color = "#FFF";
+      img.setAttribute("width", "250px");
+      img.setAttribute("width", "300px");
+      body.style.backgroundColor = "#000";
+      body.style.color = "#FFF";
+      break;
+
+    case "LightMode":
+      mainSection.style.fontSize = "16px";
+      img.setAttribute("width", "250px");
+      img.setAttribute("width", "300px");
+      body.style.backgroundColor = "#FFF";
+      body.style.color = "#000";
+
       break;
   }
 };
@@ -248,12 +277,20 @@ const createArtistCard = (artist) => {
   cardItem.classList = "card tooltip-container";
   cardItem.style.backgroundColor = "#fafafa";
 
+  //movieheader
+  const movieHeader = document.createElement("h2");
+  movieHeader.innerText = artist.filmName;
+  movieHeader.style.textAlign = "center";
+  movieSection.innerHTML = movieHeader.outerHTML;
+
   //img image
   let img = document.createElement("img");
   img.classList = "card image";
-  img.width = 200;
+  img.width = 250;
+  img.height = 300;
   imgUrl = artist.image ? artist.image : "./assets/images/m-i.jpg";
   img.setAttribute("src", imgUrl);
+  img.setAttribute("alt", "artist image");
   cardItem.appendChild(img);
 
   //p artistname
