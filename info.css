@@ -1,17 +1,46 @@
-* {
+body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Special Elite";
-  background-color: white;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+  height: 50px;
+  padding: 1rem;
+}
+
+section {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.poster,
+.thriller {
+  border: 1px solid gray;
+  box-shadow: 0px 5px 5px 0px;
+}
+
+.poster {
+  height: 400px;
+}
+
+.thriller {
+  height: 400px;
+  flex-grow: 1;
 }
 
 .menu {
   height: 1.5rem;
 }
 
-.article {
-  line-height: 2rem;
+article {
+  padding: 1rem;
+  line-height: 1.5rem;
+  min-height: 250px;
 }
 
 span {
@@ -26,6 +55,7 @@ span.genre {
 }
 
 span.tooltip-container {
+  margin: 0px 5px;
   color: blue;
 }
 
@@ -35,5 +65,57 @@ span.tooltip-container:hover {
 
 .tooltipBox {
   color: black;
-  line-height: 20px;
+  background-color: lightgrey;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px 10px 10px 0px;
+  box-shadow: 0px 5px 5px 0px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.artist-name-tooltip {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.tooltipBox img {
+  width: 280px;
+  height: 320px;
+}
+
+.tooltipBox ul li {
+  padding: 0px 15px;
+}
+
+footer {
+  height: 50px;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  section {
+    display: block;
+  }
+  .thriller {
+    width: 100%;
+    border: none;
+  }
+
+  .poster {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .poster {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .thriller {
+    display: none;
+  }
 }
