@@ -85,6 +85,20 @@ const actorTom = new Actor(
   "https://nypost.com/wp-content/uploads/sites/2/2022/10/newspress-collage-24181120-1665303870946.jpg?quality=75&strip=all&1665289530&w=744"
 );
 
+const actorJon = new Actor(
+  "Mission Impossible 1",
+  "Jon Voight",
+  1938,
+  [
+    "Midnight Cowboy (1969)",
+    "Enemy of the State (1998)",
+    "Deliverance (1972)",
+    "Runaway Train (1985)",
+    "Transformers (2007)",
+  ],
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Jon_Voight_2012.jpg/440px-Jon_Voight_2012.jpg"
+);
+
 const actorReno = new Actor(
   "Mission Impossible 1",
   "Jean Reno",
@@ -97,6 +111,18 @@ const actorReno = new Actor(
     "...etc, 110+",
   ],
   "https://upload.wikimedia.org/wikipedia/commons/e/e3/Jean_Reno_Cannes_2016.jpg"
+);
+const actorEmmanuelle = new Actor(
+  "Mission Impossible 1",
+  "Emmanuelle Béart",
+  1963,
+  [
+    "8 Women (2022)",
+    "Torment (1994)",
+    "Nelly & Monsieur Arnaud (1995)",
+    "The Passengers of the Night (2022)",
+  ],
+  "https://m.media-amazon.com/images/M/MV5BMjExNDQ4ODU2Ml5BMl5BanBnXkFtZTYwMjI0ODgz._V1_.jpg"
 );
 
 const directorDePalma = new Director(
@@ -132,6 +158,18 @@ const writerDavid = new Writer(
   ["Jurasic Park", "Stir of Echoes", "Ghost Town"],
   "https://images.gr-assets.com/authors/1567797284p5/5620.jpg"
 );
+const writerSteven = new Writer(
+  "Mission Impossible",
+  "Steven Zaillian",
+  1953,
+  [
+    "A Civil Action",
+    "The Girl with the Dragon Tattoo",
+    "MoneyBall",
+    "Searching for Bobby Fischer",
+  ],
+  "https://www.themoviedb.org/t/p/w500/3V8X2EnjzqdrUagdnjTgKi213AJ.jpg"
+);
 
 const movieMI = new Movie(
   "Mission Impossible",
@@ -141,8 +179,8 @@ const movieMI = new Movie(
   "https://m.imdb.com/video/vi3226468377/?playlistId=tt0117060&ref_=tt_pr_ov_vi",
   "An American agent, under false suspicion of disloyalty, must discover and expose the real spy without the help of his organization.",
   [directorDePalma],
-  [writerBruce, writerDavid],
-  [actorTom, actorReno]
+  [writerBruce, writerDavid, writerSteven],
+  [actorTom, actorReno, actorJon, actorEmmanuelle]
 );
 console.log(movieMI);
 
@@ -304,11 +342,13 @@ movieHeader.innerText = movieMI.filmTitle;
 articleSection.appendChild(movieHeader);
 
 const movieYear = document.createElement("span");
+movieYear.classList = "year";
 movieYear.innerText = movieMI.filmYear;
 articleSection.appendChild(movieYear);
 
 const movieGenre = document.createElement("span");
 movieGenre.innerText = movieMI.filmGenre;
+movieGenre.classList = "genre";
 articleSection.appendChild(movieGenre);
 
 const moviePlot = document.createElement("p");
@@ -324,10 +364,9 @@ directorText.innerText = "Director:";
 movieDirector.appendChild(directorText);
 
 movieMI.filmDirector.map((artist, index) => {
-  console.log("film d", artist);
   let star = document.createElement("span");
   star.id = index;
-  star.classList = `.tooltip-container movieDirector ${artist.artistName}`;
+  star.classList = `tooltip-container movieDirector ${artist.artistName}`;
   star.style.margin = "0px 5px";
   star.innerText = artist.artistName;
   movieDirector.appendChild(star);
@@ -346,7 +385,7 @@ movieWriter.appendChild(writerText);
 movieMI.filmWriters.map((artist, index) => {
   let star = document.createElement("span");
   star.id = index;
-  star.classList = `.tooltip-container movieWriter ${artist.artistName}`;
+  star.classList = `tooltip-container movieWriter ${artist.artistName}`;
   star.style.margin = "0px 5px";
   star.innerText = artist.artistName;
   movieWriter.appendChild(star);
@@ -364,7 +403,7 @@ movieActors.appendChild(movieStars);
 movieMI.filmStars.map((artist, index) => {
   let star = document.createElement("span");
   star.id = index;
-  star.classList = `.tooltip-container movieStar ${artist.artistName}`;
+  star.classList = `tooltip-container movieStar ${artist.artistName}`;
   star.style.margin = "0px 5px";
   star.innerText = artist.artistName;
   movieActors.appendChild(star);
@@ -399,25 +438,18 @@ const insertTooltip = (e) => {
       );
     }
 
-    console.log(artist);
     try {
       //div.tooltip
       let tooltip = document.createElement("div");
-      tooltip.classList = "tooltip";
-      tooltip.style.height = "min-content";
-      tooltip.style.width = "min-content";
+      tooltip.classList = "tooltipBox";
       tooltip.style.position = "absolute";
-      tooltip.style.bottom = "5%";
-
-      tooltip.style.zIndex = "2";
+      tooltip.style.right = "5%";
 
       let img = document.createElement("img");
-      img.classList = "card image";
       imgUrl = artist[0].image;
       img.setAttribute("src", imgUrl);
       img.setAttribute("alt", "artist image");
       img.width = 280;
-      img.style.borderRadius = "5px";
       tooltip.appendChild(img);
 
       let p1 = document.createElement("p");
@@ -430,7 +462,7 @@ const insertTooltip = (e) => {
       tooltip.appendChild(p2);
 
       let ul = document.createElement("ul");
-      ul.style.padding = "0px 20px";
+      ul.style.padding = "0px 15px";
       let list = artist[0].movieList ? artist[0].movieList : artist[0].books;
 
       for (let i = 0; i < list.length; i++) {
@@ -447,7 +479,7 @@ const insertTooltip = (e) => {
 const deleteTooltip = (e) => {
   try {
     const tooltipContainer = e.target;
-    let tooltip = tooltipContainer.querySelector(".tooltip");
+    let tooltip = tooltipContainer.querySelector(".tooltipBox");
     tooltipContainer.removeChild(tooltip);
   } catch (error) {}
 };

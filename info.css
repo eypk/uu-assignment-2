@@ -10,132 +10,30 @@
   height: 1.5rem;
 }
 
-.tooltip {
-  background-color: "#a5a5a5";
-}
-/* 
-.tooltip-container {
-  position: relative;
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 5px;
-}
-.tooltip {
-  position: absolute;
-  visibility: hidden;
-  background-color: rgb(0, 0, 0, 0.5);
-  color: #fff;
-  text-align: left;
-  padding: 5px;
-  border-radius: 5px 5px 5px 5px;
-  z-index: 1;
+.article {
+  line-height: 2rem;
 }
 
-.tooltip-container:hover .tooltip {
-  visibility: visible;
+span {
+  padding: 3px;
+  border-radius: 3px;
 }
 
-.root {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+span.year,
+span.genre {
+  margin: 0px 5px;
+  background-color: lightgray;
 }
 
-main,
-header,
-footer {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+span.tooltip-container {
+  color: blue;
 }
 
-.nav-bar {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  padding-top: 3rem;
-  margin-bottom: -5rem;
+span.tooltip-container:hover {
+  text-decoration: underline;
 }
 
-.nav-bar-header {
-  width: 1200px;
-  height: 80px;
-  background-color: white;
-  color: #243340;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 20;
-  font-weight: 800;
+.tooltipBox {
+  color: black;
+  line-height: 20px;
 }
-
-.nav-bar-header a {
-  color: #75838c;
-  text-decoration: none;
-}
-
-.nav-bar-header a:active {
-  color: #724849;
-}
-
-.nav-bar-header a:hover {
-  color: #724849;
-}
-.nav-bar-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 10px;
-}
-
-.nav-bar-header nav a {
-  background-image: linear-gradient(#724849, #724849);
-  background-size: 0% 0.1em;
-  background-position-y: 100%;
-  background-position-x: 100%;
-  background-repeat: no-repeat;
-  transition: background-size 0.2s ease-in-out;
-}
-
-a:hover,
-a:focus,
-a:active {
-  background-size: 100% 0.1em;
-  background-position-x: 0%;
-}
-
-.action {
-  width: 20%;
-  background-color: #724849;
-  text-align: center;
-  padding: 2rem;
-}
-
-.action:hover {
-  color: white;
-  background-color: #75838c;
-}
-
-.action a {
-  color: white;
-  text-decoration: none;
-}
-
-.logo {
-  display: flex;
-  justify-content: center;
-  width: 20%;
-}
-
-.logo a img {
-  padding: 2rem;
-  width: 100%;
-  min-width: 80px;
-}
-
-.navigation {
-  width: 60%;
-  padding: 10px;
-} */
