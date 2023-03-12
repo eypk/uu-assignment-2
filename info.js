@@ -1,32 +1,39 @@
-// OverAll
+//GLOBALS
 
-// Develop a dynamic version of the website created in Assignment 1 using JavaScript (if necessary, you can change/extend the main theme). Use DOM methods, nodes, properties and events to interactively modify the content and appearance of your web-pages according to user actions. Use event listeners to process the events. Implement at least 1 case of event propagation (W3C model).
-// Create an info.html page whose main content is constructed purely through DOM manipulation (not document.write(), not .innerHTML). In other words, such elements as <nav>,< header>, <footer> and <aside> can still be a part of the file info.html, but all the actual content of the page has to be produced by JavaScript on the fly when the page is loaded.
+let selectedSection = "body";
+let selectedStyle = "fontSize";
 
-// Assigment Part
-
-// '''The content of this page should be populated using a hierarchy of objects where each object stores a structured representation of a corresponding entity. You need to implement several classes:
-// Class Movie will hold the structural representation of the entire film.
-// Class Artist will describe any person involved in the movie industry; it should specify at least the name and the year of birth.
-// Class Director will extend the class Artist; it can add a list of movies that this person has directed before.
-// Class Writer will extend the class Artist; it can add a list of books that this person has written before.
-// Class Actor will extend the class Artist; it can add a list of movies, in which this person starred before, and a link to his/her photo.
-// We assume, that nobody is interested in how writers and directors look like, and also that the same person cannot be an Actor and a Director and/or Writer.'''
-
-//Class Movie parent Class
+//Class Movie
 
 class Movie {
-  constructor(filmName, filmRating) {
-    this.filmName = filmName;
-    this.filmRating = filmRating;
+  constructor(
+    filmTitle,
+    filmGenre,
+    filmYear,
+    filmPoster,
+    filmTrailer,
+    filmPlot,
+    filmDirector,
+    filmWriters,
+    filmStars
+  ) {
+    this.filmTitle = filmTitle;
+    this.filmGenre = filmGenre;
+    this.filmYear = filmYear;
+    this.filmPoster = filmPoster;
+    this.filmTrailer = filmTrailer;
+    this.filmPlot = filmPlot;
+    this.filmDirector = filmDirector;
+    this.filmWriters = filmWriters;
+    this.filmStars = filmStars;
   }
 }
 
-//Class Artisit
+// class Artist
 
-class Artist extends Movie {
-  constructor(filmName, filmRating, artistName, ArtistDob) {
-    super(filmName, filmRating);
+class Artist {
+  constructor(filmTitle, artistName, ArtistDob) {
+    this.filmTitle = filmTitle;
     this.artistName = artistName;
     this.ArtistDob = ArtistDob;
   }
@@ -35,8 +42,8 @@ class Artist extends Movie {
 //Class Director
 
 class Director extends Artist {
-  constructor(filmName, filmRating, artistName, ArtistDob, movieList, image) {
-    super(filmName, filmRating, artistName, ArtistDob);
+  constructor(filmName, artistName, ArtistDob, movieList, image) {
+    super(filmName, artistName, ArtistDob);
     this.movieList = movieList;
     this.image = image;
   }
@@ -45,8 +52,8 @@ class Director extends Artist {
 //Class Writer
 
 class Writer extends Artist {
-  constructor(filmName, filmRating, artistName, ArtistDob, books, image) {
-    super(filmName, filmRating, artistName, ArtistDob);
+  constructor(filmName, artistName, ArtistDob, books, image) {
+    super(filmName, artistName, ArtistDob);
     this.books = books;
     this.image = image;
   }
@@ -55,40 +62,58 @@ class Writer extends Artist {
 //Class Actor
 
 class Actor extends Artist {
-  constructor(filmName, filmRating, artistName, ArtistDob, movieList, image) {
-    super(filmName, filmRating, artistName, ArtistDob);
+  constructor(filmName, artistName, ArtistDob, movieList, image) {
+    super(filmName, artistName, ArtistDob);
     this.movieList = movieList;
     this.image = image;
   }
 }
 
-//Class ok
-
 // Entity to be created using constructor
 
-const movieMI = new Movie("Mission Impossible", 8);
-
-const artistTom = new Actor(
-  "Mission Impossible 1-7",
-  8,
+const actorTom = new Actor(
+  "Mission Impossible 1",
   "Tom Cruise",
-  1966,
-  ["Mission Impossible 1-7", "Jack Reacher 1-2", "Top Gun 1-2"],
-  "https://hips.hearstapps.com/hmg-prod/images/gettyimages-693134468.jpg"
+  1962,
+  [
+    "The Last Samurai (2003)",
+    "Mission Impossible 1-7 (1996 - 2023)",
+    "Jack Reacher 1-2 (2012, 2016)",
+    "Top Gun 1-2 (1986, 2022)",
+    "...etc, 50+",
+  ],
+  "https://nypost.com/wp-content/uploads/sites/2/2022/10/newspress-collage-24181120-1665303870946.jpg?quality=75&strip=all&1665289530&w=744"
 );
 
-const directorTarantino = new Director(
-  "Kill Bill 1-2",
-  7.5,
-  "quentin tarantino",
-  1978,
-  ["Kill Bill 1-2", "Unchanged Django", "Iglorious Bustards"],
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT34nsUi4KH0jaFsw_1TVRQLLQxKX0H61J1Rg&usqp=CAU"
+const actorReno = new Actor(
+  "Mission Impossible 1",
+  "Jean Reno",
+  1948,
+  [
+    "Leon (1994)",
+    "Ronin (1998)",
+    "Pink Panter (2006)",
+    "The Big Blue (2006)",
+    "...etc, 110+",
+  ],
+  "https://upload.wikimedia.org/wikipedia/commons/e/e3/Jean_Reno_Cannes_2016.jpg"
+);
+
+const directorDePalma = new Director(
+  "Mission Impossible",
+  "Brian De Palma",
+  1940,
+  [
+    "Domino (2019)",
+    "Passion (2012)",
+    "Redacted(2007)",
+    "The Black Dahlia (2006) ",
+  ],
+  "https://resizing.flixster.com/FbkvPvuxxhrPo2OQuvkQu-xdTVQ=/218x280/v2/https://flxt.tmsimg.com/assets/72901_v9_bb.jpg"
 );
 
 const writerBruce = new Writer(
-  "The Rifleman",
-  8,
+  "Mission Impossible",
   "Bruce Bernard Geller",
   1930,
   [
@@ -98,92 +123,102 @@ const writerBruce = new Writer(
     "The Rebel",
     "Mission Impossible",
   ],
-  "https://media0009.elcinema.com/uploads/_315x420_566c4fa535b4c00bc142813fbd5d1f908703fbd540361ce1b2ba42422bb86a05.jpg"
+  "https://images.mubicdn.net/images/cast_member/58314/cache-284230-1511853223/image-w856.jpg?size=240x"
+);
+const writerDavid = new Writer(
+  "Mission Impossible",
+  "David Koepp",
+  1963,
+  ["Jurasic Park", "Stir of Echoes", "Ghost Town"],
+  "https://images.gr-assets.com/authors/1567797284p5/5620.jpg"
+);
+
+const movieMI = new Movie(
+  "Mission Impossible",
+  "Action",
+  1996,
+  "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRKJNiOaWFCkcb2qQ_zMitV7QpsYiWgDNjZVWmQEsLxAMkrLr_2MsZXY3-wUIPLPC_hV8Q3Y-Fp_vmK9XA",
+  "https://m.imdb.com/video/vi3226468377/?playlistId=tt0117060&ref_=tt_pr_ov_vi",
+  "An American agent, under false suspicion of disloyalty, must discover and expose the real spy without the help of his organization.",
+  [directorDePalma],
+  [writerBruce, writerDavid],
+  [actorTom, actorReno]
 );
 console.log(movieMI);
-console.log(directorTarantino);
-console.log(artistTom);
-console.log(writerBruce);
 
-//Assignment HTML Part
+//PAGE SECTIONS
 
-// Use ES6 classes and ES6-style object construction.
-// The users should be able to mouseover the names/photos of Artists and see their extended information (previous books, movies) in a tooltip.
-// Implement two menus in your <header> or <footer> that allow the user to dynamically change the appearance of elements on a page. One menu should be used to select an element, another to modify the selected element appearance.
-//1- The options of the first menu should contain body, header, footer, aside, articles and sections(do not go deeper in the DOM hierarchy). They should be created on the fly by traversing the DOM of the page.In other words, a page can have more than one article and more than one section, and not necessarily have an aside, but the menu should be able to read them correctly from the DOM of the page.
-//2- The option of the second menu should allow to change at least the font size and the color of the selected elements.
+// body
+const body = document.querySelector("body");
+body.style.boxSizing = "border-box";
+body.style.margin = "0px";
+body.style.padding = "0px";
 
-//body style reset
-
-document.body.style.boxSizing = "border-box";
-document.body.style.margin = "0px";
-document.body.style.padding = "0px";
-document.body.style.backgroundColor = "#fafafa";
-document.body.style.fontSize = "16px";
-
-// ROOT
-
-const root = document.querySelector(".root");
-
-// Root > header
+// body > header
 const header = document.createElement("header");
-root.appendChild(header);
+header.style.height = "10vh";
+header.style.padding = "1rem";
+body.appendChild(header);
 
-// Root > header > Nav Bar
-const headerNavBar = document.createElement("nav");
-header.appendChild(headerNavBar);
+// body > Main
+const articleSection = document.createElement("article");
+articleSection.classList = "article";
+articleSection.style.padding = "1rem";
+articleSection.style.height = "40vh";
+body.appendChild(articleSection);
 
-// Root > header > Style Bar
-const headerStyleBar = document.createElement("nav");
-header.appendChild(headerStyleBar);
-
-//Root Movie Info
+// body > Main > Section
 const movieSection = document.createElement("section");
-root.appendChild(movieSection);
+movieSection.style.height = "40vh";
+movieSection.style.padding = "2rem";
+body.appendChild(movieSection);
 
-// Root > Main
-
-const mainSection = document.createElement("main");
-root.appendChild(mainSection);
-
-// Root > Footer
+// body > Footer
 const footer = document.createElement("footer");
-root.appendChild(footer);
-
-const footerNavBar = document.createElement("nav");
-footer.appendChild(footerNavBar);
+footer.style.height = "10vh";
+footer.style.padding = "1rem";
+body.appendChild(footer);
 
 //FUNCTIONS
 
-// Select Box Menu in navBars
+// Create Section Select Menu
+const createSectionMenu = () => {
+  const selectSectionBox = document.createElement("select");
+  selectSectionBox.classList = "menu selectSectionBox";
 
-const createNavbar = () => {
-  const selectBox = document.createElement("select");
-  selectBox.classList = "navBar";
+  const sectionOption1 = document.createElement("option");
+  sectionOption1.value = "body";
+  sectionOption1.text = "body";
 
-  const option1 = document.createElement("option");
-  option1.value = "Director";
-  option1.text = "Director";
+  const sectionOption2 = document.createElement("option");
+  sectionOption2.value = "header";
+  sectionOption2.text = "header";
 
-  const option2 = document.createElement("option");
-  option2.value = "Writer";
-  option2.text = "Writer";
+  const sectionOption3 = document.createElement("option");
+  sectionOption3.value = "article";
+  sectionOption3.text = "article";
 
-  const option3 = document.createElement("option");
-  option3.value = "Actor";
-  option3.text = "Actor";
+  const sectionOption4 = document.createElement("option");
+  sectionOption4.value = "section";
+  sectionOption4.text = "section";
 
-  selectBox.add(option1);
-  selectBox.add(option2);
-  selectBox.add(option3);
+  const sectionOption5 = document.createElement("option");
+  sectionOption5.value = "footer";
+  sectionOption5.text = "footer";
 
-  return selectBox;
+  selectSectionBox.add(sectionOption1);
+  selectSectionBox.add(sectionOption2);
+  selectSectionBox.add(sectionOption3);
+  selectSectionBox.add(sectionOption4);
+  selectSectionBox.add(sectionOption5);
+
+  return selectSectionBox;
 };
-// Select Box Menu in navBars
 
-const createStyleBar = () => {
+// Create Style Slect Menu
+const createStyleMenu = () => {
   const selectStyleBox = document.createElement("select");
-  selectStyleBox.classList = "navStyleBar";
+  selectStyleBox.classList = "menu selectStyleBox";
 
   const option1 = document.createElement("option");
   option1.value = "fontSize";
@@ -209,186 +244,222 @@ const createStyleBar = () => {
   return selectStyleBox;
 };
 
-// select item
+// select sction
+const SelectSection = (e) => {
+  let section = e.target.value;
 
-const SelectItem = (e) => {
-  selectedMenuItem = e.target.value;
-
-  switch (selectedMenuItem) {
-    case "Director":
-      createArtistCard(directorTarantino);
-      selectedMenuItem = directorTarantino;
+  switch (section) {
+    case "body":
+      selectedSection = section;
       break;
 
-    case "Writer":
-      createArtistCard(writerBruce);
-      selectedMenuItem = writerBruce;
+    case "header":
+      selectedSection = section;
       break;
 
-    case "Actor":
-      createArtistCard(artistTom);
-      selectedMenuItem = artistTom;
+    case "article":
+      selectedSection = section;
+      break;
+
+    case "section":
+      selectedSection = section;
+      break;
+
+    case "footer":
+      selectedSection = section;
       break;
   }
 };
-// change style
 
+// change style
 const ChangeStyle = (e) => {
   selectedStyle = e.target.value;
-  let img = document.querySelector(".image");
-  let card = document.querySelector(".card");
-  let body = document.querySelector("body");
+  let appliedSection = document.querySelector(selectedSection);
 
   switch (selectedStyle) {
     case "fontSize":
-      img.setAttribute("width", "250px");
-      img.setAttribute("height", "300px");
-      card.style.backgroundColor = "#fafafa";
-      mainSection.style.fontSize = "18px";
-      mainSection.style.fontWeight = "bold";
+      appliedSection.style.fontSize = "1.5rem";
       break;
 
     case "imageSize":
-      mainSection.style.fontSize = "16px";
-      img.setAttribute("width", "350px");
-      img.setAttribute("height", "450px");
-      card.style.backgroundColor = "#fafafa";
-      card.style.color = "#000";
-      mainSection.style.fontWeight = "normal";
-
+      appliedSection.style.fontSize = "1.5rem";
       break;
 
     case "DarkMode":
-      mainSection.style.fontSize = "16px";
-      // img.setAttribute("width", "250px");
-      // img.setAttribute("height", "300px");
-      body.style.backgroundColor = "#000";
-      body.style.color = "#FFF";
-      card.style.color = "#000";
-
+      appliedSection.style.backgroundColor = "black";
+      appliedSection.style.color = "white";
       break;
 
     case "LightMode":
-      mainSection.style.fontSize = "16px";
-      // img.setAttribute("width", "250px");
-      // img.setAttribute("height", "300px");
-      body.style.backgroundColor = "#fafafa";
-      body.style.color = "#000";
-
+      appliedSection.style.backgroundColor = "white";
+      appliedSection.style.color = "black";
       break;
   }
 };
 
-//Create Card
+//Insert Movie Info
 
-const createArtistCard = (artist) => {
-  //div.tooltip-container
-  let cardItem = document.createElement("div");
-  cardItem.classList = "card tooltip-container";
-  cardItem.style.backgroundColor = "#fafafa";
-  cardItem.style.textAlign = "center";
+const movieHeader = document.createElement("h2");
+movieHeader.innerText = movieMI.filmTitle;
+articleSection.appendChild(movieHeader);
 
-  //movieheader
-  const movieHeader = document.createElement("h2");
-  movieHeader.innerText = artist.filmName;
-  movieHeader.style.textAlign = "center";
-  movieSection.innerHTML = movieHeader.outerHTML;
+const movieYear = document.createElement("span");
+movieYear.innerText = movieMI.filmYear;
+articleSection.appendChild(movieYear);
 
-  //img image
-  let img = document.createElement("img");
-  img.classList = "card image";
-  imgUrl = artist.image ? artist.image : "./assets/images/m-i.jpg";
-  img.setAttribute("src", imgUrl);
-  img.setAttribute("alt", "artist image");
-  img.width = 250;
-  img.height = 300;
-  cardItem.appendChild(img);
+const movieGenre = document.createElement("span");
+movieGenre.innerText = movieMI.filmGenre;
+articleSection.appendChild(movieGenre);
 
-  //p artistname
-  let p = document.createElement("p");
-  p.innerText = artist.artistName.toUpperCase();
-  cardItem.appendChild(p);
+const moviePlot = document.createElement("p");
+moviePlot.innerText = movieMI.filmPlot;
+articleSection.appendChild(moviePlot);
 
-  mainSection.innerHTML = cardItem.outerHTML;
-};
+//movie Director
+
+const movieDirector = document.createElement("div");
+
+let directorText = document.createElement("span");
+directorText.innerText = "Director:";
+movieDirector.appendChild(directorText);
+
+movieMI.filmDirector.map((artist, index) => {
+  console.log("film d", artist);
+  let star = document.createElement("span");
+  star.id = index;
+  star.classList = `.tooltip-container movieDirector ${artist.artistName}`;
+  star.style.margin = "0px 5px";
+  star.innerText = artist.artistName;
+  movieDirector.appendChild(star);
+});
+
+articleSection.appendChild(movieDirector);
+
+//MovieWriter
+
+const movieWriter = document.createElement("div");
+
+let writerText = document.createElement("span");
+writerText.innerText = "Writer:";
+movieWriter.appendChild(writerText);
+
+movieMI.filmWriters.map((artist, index) => {
+  let star = document.createElement("span");
+  star.id = index;
+  star.classList = `.tooltip-container movieWriter ${artist.artistName}`;
+  star.style.margin = "0px 5px";
+  star.innerText = artist.artistName;
+  movieWriter.appendChild(star);
+});
+
+articleSection.appendChild(movieWriter);
+
+//movie Stars
+const movieActors = document.createElement("div");
+
+let movieStars = document.createElement("span");
+movieStars.innerText = "Stars:";
+movieActors.appendChild(movieStars);
+
+movieMI.filmStars.map((artist, index) => {
+  let star = document.createElement("span");
+  star.id = index;
+  star.classList = `.tooltip-container movieStar ${artist.artistName}`;
+  star.style.margin = "0px 5px";
+  star.innerText = artist.artistName;
+  movieActors.appendChild(star);
+});
+
+articleSection.appendChild(movieActors);
+
+//tooltip events
+
+articleSection.addEventListener("mouseover", (e) => insertTooltip(e));
+articleSection.addEventListener("mouseout", (e) => deleteTooltip(e));
 
 //create tooltip
 
 const insertTooltip = (e) => {
-  const tooltipContainer = e.target.closest(".tooltip-container");
-  let artist = selectedMenuItem;
+  if (e.target.classList.value.includes("tooltip-container")) {
+    let artist;
 
-  try {
-    //div.tooltip
-    let tooltip = document.createElement("div");
-    tooltip.classList = "tooltip";
-    tooltip.style.position = "absolute";
-    tooltip.style.top = "0px";
-    tooltip.style.right = "0px";
-    // tooltip.style.visibility = "hidden";
-
-    //p artistname
-    let p1 = document.createElement("p");
-    p1.innerText = artist.artistName.toUpperCase();
-    tooltip.appendChild(p1);
-
-    //p artistname
-    let p2 = document.createElement("p");
-    p2.innerText = artist.movieList ? "Other Movies" : "Other Books";
-    tooltip.appendChild(p2);
-
-    //list
-    let ul = document.createElement("ul");
-    let list = artist.movieList ? artist.movieList : artist.books;
-
-    for (let i = 0; i < list.length; i++) {
-      let li = document.createElement("li");
-      li.textContent = list[i];
-      ul.appendChild(li);
+    if (e.target.classList.value.includes("movieStar")) {
+      artist = movieMI.filmStars.filter((item) =>
+        e.target.classList.value.includes(item.artistName)
+      );
     }
-    tooltip.appendChild(ul);
+    if (e.target.classList.value.includes("movieDirector")) {
+      artist = movieMI.filmDirector.filter((item) =>
+        e.target.classList.value.includes(item.artistName)
+      );
+    }
+    if (e.target.classList.value.includes("movieWriter")) {
+      artist = movieMI.filmWriters.filter((item) =>
+        e.target.classList.value.includes(item.artistName)
+      );
+    }
 
-    tooltipContainer.appendChild(tooltip);
-  } catch (error) {}
+    console.log(artist);
+    try {
+      //div.tooltip
+      let tooltip = document.createElement("div");
+      tooltip.classList = "tooltip";
+      tooltip.style.height = "min-content";
+      tooltip.style.width = "min-content";
+      tooltip.style.position = "absolute";
+      tooltip.style.bottom = "5%";
+
+      tooltip.style.zIndex = "2";
+
+      let img = document.createElement("img");
+      img.classList = "card image";
+      imgUrl = artist[0].image;
+      img.setAttribute("src", imgUrl);
+      img.setAttribute("alt", "artist image");
+      img.width = 280;
+      img.style.borderRadius = "5px";
+      tooltip.appendChild(img);
+
+      let p1 = document.createElement("p");
+      p1.innerText = artist[0].artistName;
+      p1.style.fontWeight = "bold";
+      tooltip.appendChild(p1);
+
+      let p2 = document.createElement("p");
+      p2.innerText = artist[0].movieList ? "Other Movies" : "Other Books";
+      tooltip.appendChild(p2);
+
+      let ul = document.createElement("ul");
+      ul.style.padding = "0px 20px";
+      let list = artist[0].movieList ? artist[0].movieList : artist[0].books;
+
+      for (let i = 0; i < list.length; i++) {
+        let li = document.createElement("li");
+        li.innerText = list[i];
+        ul.appendChild(li);
+      }
+      tooltip.appendChild(ul);
+      e.target.appendChild(tooltip);
+    } catch (error) {}
+  }
 };
 
 const deleteTooltip = (e) => {
   try {
-    const tooltipContainer = e.target.closest(".tooltip-container");
+    const tooltipContainer = e.target;
     let tooltip = tooltipContainer.querySelector(".tooltip");
     tooltipContainer.removeChild(tooltip);
   } catch (error) {}
 };
 
-// EVENT LISTENERS
+// menu events
 
-//Card onMouseOver
-mainSection.addEventListener("mouseover", (e) => insertTooltip(e));
-
-// Card onMouseOut
-mainSection.addEventListener("mouseout", (e) => deleteTooltip(e));
-
-// Select from header
-headerNavBar.addEventListener("change", (e) => {
-  SelectItem(e);
-});
-// Change Style
-headerStyleBar.addEventListener("change", (e) => {
-  ChangeStyle(e);
-});
-
-// Select from footer
-footerNavBar.addEventListener("change", (e) => {
-  SelectItem(e);
-});
+header.addEventListener("change", (e) => SelectSection(e));
+header.addEventListener("change", (e) => ChangeStyle(e));
 
 // ONLOAD
-let selectedMenuItem = directorTarantino;
-let selectedStyle = "";
 window.onload = () => {
   console.log("page is fully loaded");
-  headerNavBar.appendChild(createNavbar());
-  headerStyleBar.appendChild(createStyleBar());
-  footerNavBar.appendChild(createNavbar());
-  createArtistCard(selectedMenuItem);
+  header.appendChild(createSectionMenu());
+  header.appendChild(createStyleMenu());
 };
