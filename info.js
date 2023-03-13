@@ -77,7 +77,7 @@ const movieMI = new Movie(
   "Mission Impossible",
   "Action",
   1996,
-  "https://slicethelife.files.wordpress.com/2021/01/image-17.png",
+  "https://i.ebayimg.com/images/g/8hgAAOSwntNh5Hp0/s-l1600.jpg",
   "assets/m-i-v.mp4",
   "Mission: Impossible is a series of American action spy films based on the television series of the same name created by Bruce Geller. The series is mainly produced by and stars Tom Cruise, who plays Ethan Hunt, an agent of the Impossible Missions Force (IMF). The films have been directed, written, and scored by various filmmakers and crew, while incorporating musical themes from the original series.",
   [
@@ -376,11 +376,10 @@ window.onload = () => {
 
   const header = document.createElement("header");
 
-  // Create logo div
+  // header left div / logo
   const logoDiv = document.createElement("div");
   logoDiv.setAttribute("class", "logo");
 
-  // Create logo image
   const logoImg = document.createElement("img");
   logoImg.setAttribute(
     "src",
@@ -389,81 +388,58 @@ window.onload = () => {
   logoImg.setAttribute("alt", "logo linking to home page");
   logoImg.setAttribute("width", "180px");
 
-  // Create logo link
   const logoLink = document.createElement("a");
   logoLink.setAttribute("href", "./index.html");
   logoLink.appendChild(logoImg);
 
-  // Append logo link to logo div
   logoDiv.appendChild(logoLink);
 
-  // Header Middle Div
+  // Header Middle Div / nav + menu
   const headerMiddleDiv = document.createElement("div");
   headerMiddleDiv.classList = "headerMiddleDiv";
 
-  // Create navigation nav
   const navigationNav = document.createElement("nav");
   navigationNav.lassList = "navigationDiv";
 
-  // Create header menu div
-  const headerMenu = document.createElement("div");
-  headerMenu.classList = "headerMenu";
-
-  headerMenu.appendChild(createSectionMenu());
-  headerMenu.appendChild(createStyleMenu());
-
-  headerMiddleDiv.appendChild(navigationNav);
-  headerMiddleDiv.appendChild(headerMenu);
-
-  // Append Middle to header
-  header.appendChild(headerMiddleDiv);
-
-  // Create ul element
+  // Create nav link elements ul li
   const ul = document.createElement("ul");
 
-  // Create Home li
   const homeLi = document.createElement("li");
   const homeLink = document.createElement("a");
   homeLink.setAttribute("href", "./index.html");
   homeLink.textContent = "Home";
   homeLi.appendChild(homeLink);
 
-  // Create Cast li
   const castLi = document.createElement("li");
   const castLink = document.createElement("a");
   castLink.setAttribute("href", "./cast.html");
   castLink.textContent = "Cast";
   castLi.appendChild(castLink);
 
-  // Create Series li
   const seriesLi = document.createElement("li");
   const seriesLink = document.createElement("a");
   seriesLink.setAttribute("href", "./series.html");
   seriesLink.textContent = "Series";
   seriesLi.appendChild(seriesLink);
 
-  // Create Gallery li
   const galleryLi = document.createElement("li");
   const galleryLink = document.createElement("a");
   galleryLink.setAttribute("href", "./galery.html");
   galleryLink.textContent = "Galery";
   galleryLi.appendChild(galleryLink);
 
-  // Create Contact li
   const contactLi = document.createElement("li");
   const contactLink = document.createElement("a");
   contactLink.setAttribute("href", "./contact.html");
   contactLink.textContent = "Contact";
   contactLi.appendChild(contactLink);
 
-  // Create Contact li
   const infoLi = document.createElement("li");
   const infoLink = document.createElement("a");
   infoLink.setAttribute("href", "./info.html");
   infoLink.textContent = "Info";
   infoLi.appendChild(infoLink);
 
-  // Append li elements to ul
   ul.appendChild(homeLi);
   ul.appendChild(castLi);
   ul.appendChild(seriesLi);
@@ -471,14 +447,22 @@ window.onload = () => {
   ul.appendChild(contactLi);
   ul.appendChild(infoLi);
 
-  // Append ul to navigation nav
   navigationNav.appendChild(ul);
 
-  // Create action div
+  //header sub menu / styles
+  const headerMenu = document.createElement("div");
+  headerMenu.classList = "headerMenu";
+
+  headerMenu.appendChild(createSectionMenu());
+  headerMenu.appendChild(createStyleMenu());
+
+  // header right / action
+  headerMiddleDiv.appendChild(navigationNav);
+  headerMiddleDiv.appendChild(headerMenu);
+
   const actionDiv = document.createElement("div");
   actionDiv.classList = "action";
 
-  // Create buy DVD link
   const buyDvdLink = document.createElement("a");
   buyDvdLink.setAttribute(
     "href",
@@ -487,7 +471,6 @@ window.onload = () => {
   buyDvdLink.setAttribute("target", "_blank");
   buyDvdLink.textContent = "Buy DVD";
 
-  // Append buy DVD link to action div
   actionDiv.appendChild(buyDvdLink);
 
   // Append logo div, navigation nav, and action div to header
@@ -497,28 +480,20 @@ window.onload = () => {
 
   body.appendChild(header);
 
-  // Create the main element
+  // body > main
   const mainElem = document.createElement("main");
 
-  // Create the banner element
   const bannerElem = document.createElement("div");
   bannerElem.classList = "banner";
 
-  // Create the banner overlay element
   const bannerOverlayElem = document.createElement("div");
   bannerOverlayElem.classList = "banner_overlay";
 
-  // Create the heading element
   const headingElem = document.createElement("h2");
   headingElem.textContent = "Info";
 
-  // Append the heading element to the banner overlay element
   bannerOverlayElem.appendChild(headingElem);
-
-  // Append the banner overlay element to the banner element
   bannerElem.appendChild(bannerOverlayElem);
-
-  // Append the banner element to the main element
   mainElem.appendChild(bannerElem);
 
   body.appendChild(mainElem);
