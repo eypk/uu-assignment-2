@@ -77,9 +77,9 @@ const movieMI = new Movie(
   "Mission Impossible",
   "Action",
   1996,
-  "https://www.themoviedb.org/t/p/w1280/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg",
+  "https://slicethelife.files.wordpress.com/2021/01/image-17.png",
   "assets/m-i-v.mp4",
-  "An American agent, under false suspicion of disloyalty, must discover and expose the real spy without the help of his organization.",
+  "Mission: Impossible is a series of American action spy films based on the television series of the same name created by Bruce Geller. The series is mainly produced by and stars Tom Cruise, who plays Ethan Hunt, an agent of the Impossible Missions Force (IMF). The films have been directed, written, and scored by various filmmakers and crew, while incorporating musical themes from the original series.",
   [
     new Director(
       "Mission Impossible",
@@ -330,6 +330,8 @@ const insertTooltip = (e) => {
       imgUrl = artist[0].image;
       img.setAttribute("src", imgUrl);
       img.setAttribute("alt", "artist image");
+      img.setAttribute("width", "280px");
+      img.setAttribute("height", "320px");
       tooltip.appendChild(img);
 
       let p1 = document.createElement("p");
@@ -371,10 +373,155 @@ window.onload = () => {
   const body = document.querySelector("body");
 
   // body > header
+
   const header = document.createElement("header");
-  header.appendChild(createSectionMenu());
-  header.appendChild(createStyleMenu());
+
+  // Create logo div
+  const logoDiv = document.createElement("div");
+  logoDiv.setAttribute("class", "logo");
+
+  // Create logo image
+  const logoImg = document.createElement("img");
+  logoImg.setAttribute(
+    "src",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e5/Mission_Impossible_Rogue_Nation_Logo.png"
+  );
+  logoImg.setAttribute("alt", "logo linking to home page");
+  logoImg.setAttribute("width", "180px");
+
+  // Create logo link
+  const logoLink = document.createElement("a");
+  logoLink.setAttribute("href", "./index.html");
+  logoLink.appendChild(logoImg);
+
+  // Append logo link to logo div
+  logoDiv.appendChild(logoLink);
+
+  // Header Middle Div
+  const headerMiddleDiv = document.createElement("div");
+  headerMiddleDiv.classList = "headerMiddleDiv";
+
+  // Create navigation nav
+  const navigationNav = document.createElement("nav");
+  navigationNav.lassList = "navigationDiv";
+
+  // Create header menu div
+  const headerMenu = document.createElement("div");
+  headerMenu.classList = "headerMenu";
+
+  headerMenu.appendChild(createSectionMenu());
+  headerMenu.appendChild(createStyleMenu());
+
+  headerMiddleDiv.appendChild(navigationNav);
+  headerMiddleDiv.appendChild(headerMenu);
+
+  // Append Middle to header
+  header.appendChild(headerMiddleDiv);
+
+  // Create ul element
+  const ul = document.createElement("ul");
+
+  // Create Home li
+  const homeLi = document.createElement("li");
+  const homeLink = document.createElement("a");
+  homeLink.setAttribute("href", "./index.html");
+  homeLink.textContent = "Home";
+  homeLi.appendChild(homeLink);
+
+  // Create Cast li
+  const castLi = document.createElement("li");
+  const castLink = document.createElement("a");
+  castLink.setAttribute("href", "./cast.html");
+  castLink.textContent = "Cast";
+  castLi.appendChild(castLink);
+
+  // Create Series li
+  const seriesLi = document.createElement("li");
+  const seriesLink = document.createElement("a");
+  seriesLink.setAttribute("href", "./series.html");
+  seriesLink.textContent = "Series";
+  seriesLi.appendChild(seriesLink);
+
+  // Create Gallery li
+  const galleryLi = document.createElement("li");
+  const galleryLink = document.createElement("a");
+  galleryLink.setAttribute("href", "./galery.html");
+  galleryLink.textContent = "Galery";
+  galleryLi.appendChild(galleryLink);
+
+  // Create Contact li
+  const contactLi = document.createElement("li");
+  const contactLink = document.createElement("a");
+  contactLink.setAttribute("href", "./contact.html");
+  contactLink.textContent = "Contact";
+  contactLi.appendChild(contactLink);
+
+  // Create Contact li
+  const infoLi = document.createElement("li");
+  const infoLink = document.createElement("a");
+  infoLink.setAttribute("href", "./info.html");
+  infoLink.textContent = "Info";
+  infoLi.appendChild(infoLink);
+
+  // Append li elements to ul
+  ul.appendChild(homeLi);
+  ul.appendChild(castLi);
+  ul.appendChild(seriesLi);
+  ul.appendChild(galleryLi);
+  ul.appendChild(contactLi);
+  ul.appendChild(infoLi);
+
+  // Append ul to navigation nav
+  navigationNav.appendChild(ul);
+
+  // Create action div
+  const actionDiv = document.createElement("div");
+  actionDiv.classList = "action";
+
+  // Create buy DVD link
+  const buyDvdLink = document.createElement("a");
+  buyDvdLink.setAttribute(
+    "href",
+    "https://www.bol.com/nl/nl/p/mission-impossible-the-5-movie-collection/9300000043299885/?Referrer="
+  );
+  buyDvdLink.setAttribute("target", "_blank");
+  buyDvdLink.textContent = "Buy DVD";
+
+  // Append buy DVD link to action div
+  actionDiv.appendChild(buyDvdLink);
+
+  // Append logo div, navigation nav, and action div to header
+  header.appendChild(logoDiv);
+  header.appendChild(headerMiddleDiv);
+  header.appendChild(actionDiv);
+
   body.appendChild(header);
+
+  // Create the main element
+  const mainElem = document.createElement("main");
+
+  // Create the banner element
+  const bannerElem = document.createElement("div");
+  bannerElem.classList = "banner";
+
+  // Create the banner overlay element
+  const bannerOverlayElem = document.createElement("div");
+  bannerOverlayElem.classList = "banner_overlay";
+
+  // Create the heading element
+  const headingElem = document.createElement("h2");
+  headingElem.textContent = "Info";
+
+  // Append the heading element to the banner overlay element
+  bannerOverlayElem.appendChild(headingElem);
+
+  // Append the banner overlay element to the banner element
+  bannerElem.appendChild(bannerOverlayElem);
+
+  // Append the banner element to the main element
+  mainElem.appendChild(bannerElem);
+
+  body.appendChild(mainElem);
 
   // body > Section
   const movieSection = document.createElement("section");
@@ -385,6 +532,8 @@ window.onload = () => {
   poster.classList = "poster";
   poster.setAttribute("src", movieMI.filmPoster);
   poster.setAttribute("alt", "movie poster");
+  poster.height = 300;
+  poster.width = 300;
   movieSection.appendChild(poster);
 
   //movie  thriller
@@ -477,8 +626,33 @@ window.onload = () => {
 
   // body > Footer
   const footer = document.createElement("footer");
-  footer.appendChild(createSectionMenu());
-  footer.appendChild(createStyleMenu());
+
+  const leftDiv = document.createElement("div");
+  leftDiv.setAttribute("id", "footer_left");
+
+  const developersP = document.createElement("p");
+  developersP.setAttribute("class", "developers");
+  developersP.textContent = "Developed by Fatih - Eyup - Mark";
+
+  leftDiv.appendChild(developersP);
+
+  const middleDiv = document.createElement("div");
+  middleDiv.setAttribute("id", "footer_middle");
+  middleDiv.appendChild(createSectionMenu());
+  middleDiv.appendChild(createStyleMenu());
+
+  const rightDiv = document.createElement("div");
+  rightDiv.setAttribute("id", "footer_right");
+
+  const assignmentP = document.createElement("p");
+  assignmentP.textContent = `UU Assignment II © ${new Date().getFullYear()}`;
+
+  rightDiv.appendChild(assignmentP);
+
+  footer.appendChild(leftDiv);
+  footer.appendChild(middleDiv);
+  footer.appendChild(rightDiv);
+
   body.appendChild(footer);
 
   //EVENTS
