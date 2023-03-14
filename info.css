@@ -1,0 +1,264 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Special Elite", cursive;
+}
+
+/* Header + Menu */
+header {
+  background-color: white;
+  max-width: 1200px;
+  height: 80px;
+  margin: 3rem auto -2.5rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  padding: 1rem;
+}
+
+.logo a img {
+  width: 100%;
+}
+
+.headerMiddleDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0px;
+}
+
+nav a {
+  text-decoration: none;
+  background-image: linear-gradient(#724849, #724849);
+  background-size: 0% 0.1em;
+  background-position-y: 100%;
+  background-position-x: 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.2s ease-in-out;
+}
+
+a:hover,
+a:focus,
+a:active {
+  background-size: 100% 0.1em;
+  background-position-x: 0%;
+}
+
+.menu {
+  margin: 0rem 1rem;
+}
+.action {
+  width: 20%;
+  background-color: #724849;
+  text-align: center;
+  padding: 2rem;
+}
+
+.action a {
+  color: white;
+  text-decoration: none;
+}
+
+.action:hover {
+  color: white;
+  background-color: #75838c;
+}
+
+/* Banner */
+
+.banner {
+  width: 100%;
+  height: 25rem;
+  background-image: url("./assets/images/banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -2rem;
+}
+
+.banner_overlay h2 {
+  color: white;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.banner_overlay {
+  background-color: #243340;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  color: white;
+  width: 100%;
+  height: 25rem;
+}
+
+/* Section */
+section {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.poster,
+.thriller {
+  border: 1px solid gray;
+  box-shadow: 0px 5px 5px 0px;
+}
+
+.thriller {
+  height: 300px;
+  flex-grow: 1;
+}
+.poster {
+  width: 300px;
+  height: 300px;
+}
+
+.menu {
+  height: 1.5rem;
+}
+
+article {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+  line-height: 1.5rem;
+  min-height: 250px;
+}
+
+article p {
+  text-align: justify;
+}
+
+span {
+  padding: 3px;
+  border-radius: 3px;
+}
+
+span.year,
+span.genre {
+  margin: 0px 5px;
+  background-color: lightgray;
+  color: black;
+}
+span.year:hover,
+span.genre:hover {
+  background-color: darkgray;
+}
+
+span.tooltip-container {
+  margin: 0px 3px;
+  color: blue;
+}
+
+span.tooltip-container:hover {
+  text-decoration: underline;
+}
+
+.tooltipBox {
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px 10px 10px 0px;
+  box-shadow: 0px 5px 5px 0px;
+  position: absolute;
+  top: 40%;
+  z-index: 100;
+}
+
+.artist-name-tooltip {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.tooltipBox ul li {
+  padding: 0px 15px;
+}
+
+footer {
+  width: 80%;
+  margin: auto;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  section,
+  article,
+  footer {
+    width: 90%;
+  }
+
+  .thriller {
+    width: 100%;
+    border: none;
+  }
+
+  .poster {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .headerMiddleDiv {
+    width: 100%;
+  }
+  .logo,
+  .action {
+    display: none;
+  }
+  #footer_left {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tooltipBox {
+    top: 70%;
+  }
+  .poster {
+    display: block;
+    height: 100%;
+    width: 330px;
+    margin: auto;
+  }
+
+  .thriller {
+    display: none;
+  }
+  #footer_right {
+    display: none;
+  }
+}
