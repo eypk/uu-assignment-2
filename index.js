@@ -13,27 +13,40 @@ const createSectionMenu = () => {
   const sectionOption1 = document.createElement("option");
   sectionOption1.value = "body";
   sectionOption1.text = "body";
+  selectSectionBox.add(sectionOption1);
 
   const sectionOption2 = document.createElement("option");
   sectionOption2.value = "header";
   sectionOption2.text = "header";
+  selectSectionBox.add(sectionOption2);
 
   const sectionOption3 = document.createElement("option");
   sectionOption3.value = "section";
   sectionOption3.text = "section";
+  selectSectionBox.add(sectionOption3);
 
-  const sectionOption4 = document.createElement("option");
-  sectionOption4.value = "article";
-  sectionOption4.text = "article";
+  if (document.querySelector("article")) {
+    const sectionOption4 = document.createElement("option");
+    sectionOption4.value = "article";
+    sectionOption4.text = "article";
+    selectSectionBox.add(sectionOption4);
+  }
+  if (document.querySelector("h2")) {
+    const sectionOption7 = document.createElement("option");
+    sectionOption7.value = "h2";
+    sectionOption7.text = "h2";
+    selectSectionBox.add(sectionOption7);
+  }
+  if (document.querySelector("main")) {
+    const sectionOption6 = document.createElement("option");
+    sectionOption6.value = "main";
+    sectionOption6.text = "main";
+    selectSectionBox.add(sectionOption6);
+  }
 
   const sectionOption5 = document.createElement("option");
   sectionOption5.value = "footer";
   sectionOption5.text = "footer";
-
-  selectSectionBox.add(sectionOption1);
-  selectSectionBox.add(sectionOption2);
-  selectSectionBox.add(sectionOption3);
-  selectSectionBox.add(sectionOption4);
   selectSectionBox.add(sectionOption5);
 
   return selectSectionBox;
@@ -77,11 +90,19 @@ const SelectSection = (e) => {
       selectedSection = section;
       break;
 
+    case "h2":
+      selectedSection = section;
+      break;
+
     case "header":
       selectedSection = section;
       break;
 
     case "article":
+      selectedSection = section;
+      break;
+
+    case "main":
       selectedSection = section;
       break;
 
@@ -100,24 +121,36 @@ const ChangeStyle = (e) => {
   selectedStyle = e.target.value;
   let appliedSection = document.querySelector(selectedSection);
 
-  switch (selectedStyle) {
-    case "Enlarge":
-      appliedSection.style.fontSize = "1.5rem";
-      break;
+  if (selectedSection === "h2") {
+    switch (selectedStyle) {
+      case "Enlarge":
+        document.querySelector("h2").style.fontSize = "120px";
+        break;
 
-    case "Delarge":
-      appliedSection.style.fontSize = "1rem";
-      break;
+      case "Delarge":
+        document.querySelector("h2").style.fontSize = "60px";
+        break;
+    }
+  } else {
+    switch (selectedStyle) {
+      case "Enlarge":
+        appliedSection.style.fontSize = "1.5rem";
+        break;
 
-    case "DarkMode":
-      appliedSection.style.backgroundColor = "black";
-      appliedSection.style.color = "white";
-      break;
+      case "Delarge":
+        appliedSection.style.fontSize = "1rem";
+        break;
 
-    case "LightMode":
-      appliedSection.style.backgroundColor = "white";
-      appliedSection.style.color = "black";
-      break;
+      case "DarkMode":
+        appliedSection.style.backgroundColor = "black";
+        appliedSection.style.color = "white";
+        break;
+
+      case "LightMode":
+        appliedSection.style.backgroundColor = "white";
+        appliedSection.style.color = "black";
+        break;
+    }
   }
 };
 
