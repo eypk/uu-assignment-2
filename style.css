@@ -141,6 +141,9 @@ footer {
     padding: 0px;
   }
 
+  .logo {
+    display: none;
+  }
   .action {
     display: none;
   }
@@ -150,6 +153,9 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  .nav-bar {
+    padding-top: 0px;
+  }
   header nav li {
     font-size: 12px;
   }

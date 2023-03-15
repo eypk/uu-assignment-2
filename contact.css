@@ -15,8 +15,10 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
-  padding-top: 3rem;
-  margin-bottom: -2.5rem;
+  margin-top: 3rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header {
@@ -188,19 +190,20 @@ footer {
     display: none;
   }
 
-  .logo a img {
+  /* .logo a img {
     display: flex;
     width: 100px;
-  }
+  } */
 
   .navigation {
-    width: 70%;
+    width: 100%;
     align-items: center;
     justify-content: center;
     margin-left: 15px;
   }
 
   .logo {
-    width: 30%;
+    /* width: 30%; */
+    display: none;
   }
 }

@@ -15,7 +15,8 @@ body {
   align-items: center;
   display: flex;
   margin-top: 3rem;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
 }
 
@@ -188,9 +189,12 @@ footer {
 }
 
 @media screen and (max-width: 760px) {
-  .logo a img {
-    padding: 0px;
+  .logo {
+    display: none;
   }
+  /* .logo a img {
+    padding: 0px;
+  } */
   .action {
     display: none;
   }

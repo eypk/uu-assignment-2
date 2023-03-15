@@ -167,8 +167,8 @@ const movieMI = new Movie(
       [
         "8 Women (2022)",
         "Torment (1994)",
-        "Nelly & Monsieur Arnaud (1995)",
-        "The Passengers of the Night (2022)",
+        "Nelly & Mr. Arnaud (1995)",
+        "The Passengers (2022)",
       ],
       "https://m.media-amazon.com/images/M/MV5BMjExNDQ4ODU2Ml5BMl5BanBnXkFtZTYwMjI0ODgz._V1_.jpg"
     ),
