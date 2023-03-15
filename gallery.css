@@ -188,10 +188,14 @@ footer {
   font-size: 10px;
 }
 
+.headerMiddleDiv {
+  text-align: center;
+}
+#footer_middle {
+  text-align: center;
+}
+
 @media screen and (max-width: 760px) {
-  .logo {
-    display: none;
-  }
   /* .logo a img {
     padding: 0px;
   } */

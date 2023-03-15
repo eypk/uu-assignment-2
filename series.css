@@ -212,12 +212,20 @@ footer {
   font-size: 10px;
 }
 
+.headerMiddleDiv {
+  text-align: center;
+}
+#footer_middle {
+  text-align: center;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 760px) {
   .logo a img {
     padding: 0px;
   }
+
   .action {
     display: none;
   }
@@ -236,7 +244,14 @@ footer {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
+  .logo {
+    display: none;
+  }
+
+  .nav-bar {
+    margin-top: 0px;
+  }
   header nav li {
     font-size: 12px;
   }

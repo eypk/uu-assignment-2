@@ -370,10 +370,12 @@ window.onload = () => {
   // body > header
 
   const header = document.createElement("header");
+  header.classList = "info_page_header";
+  body.appendChild(header);
 
   // header left div / logo
   const logoDiv = document.createElement("div");
-  logoDiv.setAttribute("class", "logo");
+  logoDiv.setAttribute("class", "info_logo");
 
   const logoImg = document.createElement("img");
   logoImg.setAttribute(
@@ -448,10 +450,8 @@ window.onload = () => {
   const headerMenu = document.createElement("div");
   headerMenu.classList = "headerMenu";
 
-  headerMenu.appendChild(createSectionMenu());
-  headerMenu.appendChild(createStyleMenu());
-
   // header right / action
+
   headerMiddleDiv.appendChild(navigationNav);
   headerMiddleDiv.appendChild(headerMenu);
 
@@ -468,15 +468,13 @@ window.onload = () => {
 
   actionDiv.appendChild(buyDvdLink);
 
-  // Append logo div, navigation nav, and action div to header
-  header.appendChild(logoDiv);
-  header.appendChild(headerMiddleDiv);
-  header.appendChild(actionDiv);
-
-  body.appendChild(header);
+  document.querySelector(".info_page_header").appendChild(logoDiv);
+  document.querySelector(".info_page_header").appendChild(headerMiddleDiv);
+  document.querySelector(".info_page_header").appendChild(actionDiv);
 
   // body > main
   const mainElem = document.createElement("main");
+  body.appendChild(mainElem);
 
   const bannerElem = document.createElement("div");
   bannerElem.classList = "banner";
@@ -490,8 +488,6 @@ window.onload = () => {
   bannerOverlayElem.appendChild(headingElem);
   bannerElem.appendChild(bannerOverlayElem);
   mainElem.appendChild(bannerElem);
-
-  body.appendChild(mainElem);
 
   // body > Section
   const movieSection = document.createElement("section");
@@ -596,6 +592,7 @@ window.onload = () => {
 
   // body > Footer
   const footer = document.createElement("footer");
+  body.appendChild(footer);
 
   const leftDiv = document.createElement("div");
   leftDiv.setAttribute("id", "footer_left");
@@ -608,8 +605,6 @@ window.onload = () => {
 
   const middleDiv = document.createElement("div");
   middleDiv.setAttribute("id", "footer_middle");
-  middleDiv.appendChild(createSectionMenu());
-  middleDiv.appendChild(createStyleMenu());
 
   const rightDiv = document.createElement("div");
   rightDiv.setAttribute("id", "footer_right");
@@ -623,7 +618,16 @@ window.onload = () => {
   footer.appendChild(middleDiv);
   footer.appendChild(rightDiv);
 
-  body.appendChild(footer);
+  // adding functionalities to menus
+
+  document.querySelector(".headerMenu").appendChild(createSectionMenu());
+  document.querySelector(".headerMenu").appendChild(createStyleMenu());
+
+  // headerMenu.appendChild(createSectionMenu());
+  // headerMenu.appendChild(createStyleMenu());
+
+  middleDiv.appendChild(createSectionMenu());
+  middleDiv.appendChild(createStyleMenu());
 
   //EVENTS
 
@@ -632,12 +636,24 @@ window.onload = () => {
   articleSection.addEventListener("mouseover", (e) => insertTooltip(e));
   articleSection.addEventListener("mouseout", (e) => deleteTooltip(e));
 
-  // menu events
+  // adding menu events traversing on the web page
 
-  header.addEventListener("change", (e) => SelectSection(e));
-  header.addEventListener("change", (e) => ChangeStyle(e));
-  footer.addEventListener("change", (e) => SelectSection(e));
-  footer.addEventListener("change", (e) => ChangeStyle(e));
+  document
+    .querySelector("header")
+    .addEventListener("change", (e) => SelectSection(e));
+  document
+    .querySelector("header")
+    .addEventListener("change", (e) => ChangeStyle(e));
+
+  document
+    .querySelector("footer")
+    .addEventListener("change", (e) => SelectSection(e));
+  document;
+  document
+    .querySelector("footer")
+    .addEventListener("change", (e) => ChangeStyle(e));
 
   console.log("page is fully loaded");
 };
+
+document.querySelector("body")[0].setAttribute("background", "red");
