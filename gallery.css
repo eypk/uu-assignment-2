@@ -185,11 +185,12 @@ footer {
   align-items: center;
   justify-content: space-around;
   padding: 10px;
-  font-size: 10px;
+  /* font-size: 10px; */
 }
 
 .headerMiddleDiv {
   text-align: center;
+  width: 60%;
 }
 #footer_middle {
   text-align: center;
@@ -205,9 +206,21 @@ footer {
   header {
     justify-content: space-around;
   }
+
+  .logo {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  header {
+    width: 100%;
+    margin: 0px;
+    font-size: 12px;
+  }
+  .nav-bar {
+    margin-top: 0rem;
+  }
   header nav li {
     font-size: 12px;
   }

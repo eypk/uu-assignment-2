@@ -43,6 +43,12 @@ const createSectionMenu = () => {
     sectionOption6.text = "main";
     selectSectionBox.add(sectionOption6);
   }
+  if (document.querySelector("p")) {
+    const sectionOption8 = document.createElement("option");
+    sectionOption8.value = "p";
+    sectionOption8.text = "p";
+    selectSectionBox.add(sectionOption8);
+  }
 
   const sectionOption5 = document.createElement("option");
   sectionOption5.value = "footer";
@@ -98,6 +104,10 @@ const SelectSection = (e) => {
       selectedSection = section;
       break;
 
+    case "p":
+      selectedSection = section;
+      break;
+
     case "article":
       selectedSection = section;
       break;
@@ -124,11 +134,11 @@ const ChangeStyle = (e) => {
   if (selectedSection === "h2") {
     switch (selectedStyle) {
       case "Enlarge":
-        document.querySelector("h2").style.fontSize = "120px";
+        document.querySelector("h2").style.fontSize = "7rem";
         break;
 
       case "Delarge":
-        document.querySelector("h2").style.fontSize = "60px";
+        document.querySelector("h2").style.fontSize = "5rem";
         break;
     }
   } else {

@@ -375,7 +375,7 @@ window.onload = () => {
 
   // header left div / logo
   const logoDiv = document.createElement("div");
-  logoDiv.setAttribute("class", "info_logo");
+  logoDiv.setAttribute("class", "logo");
 
   const logoImg = document.createElement("img");
   logoImg.setAttribute(
