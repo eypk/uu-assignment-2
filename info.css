@@ -245,13 +245,16 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  body {
+    min-width: 320px;
+  }
   .tooltipBox {
     top: 70%;
   }
   .poster {
     display: block;
     height: 100%;
-    width: 330px;
+    width: 320px;
     margin: auto;
   }
 

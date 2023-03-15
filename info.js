@@ -119,12 +119,7 @@ const movieMI = new Movie(
       "Mission Impossible",
       "Steven Zaillian",
       1953,
-      [
-        "A Civil Action",
-        "The Girl with the Dragon Tattoo",
-        "MoneyBall",
-        "Searching for Bobby Fischer",
-      ],
+      ["A Civil Action", "MoneyBall", "Bobby Fischer"],
       "https://www.themoviedb.org/t/p/w500/3V8X2EnjzqdrUagdnjTgKi213AJ.jpg"
     ),
   ],
@@ -135,8 +130,8 @@ const movieMI = new Movie(
       1962,
       [
         "The Last Samurai (2003)",
-        "Mission Impossible 1-7 (1996 - 2023)",
-        "Jack Reacher 1-2 (2012, 2016)",
+        "MI: 1-7 (1996 - 2023)",
+        "Jack Reacher (2012, 2016)",
         "Top Gun 1-2 (1986, 2022)",
       ],
       "https://www.themoviedb.org/t/p/w500/8qBylBsQf4llkGrWR3qAsOtOU8O.jpg"
